@@ -1,3 +1,3 @@
-# Scala.js tutorial
+# scalajs-react
 
-This is my repo for the Scala.js basic tutorial https://www.scala-js.org/doc/tutorial/basic/.
+This is my repo for the scalajs-react getting started page https://github.com/japgolly/scalajs-react/blob/master/doc/USAGE.md.
