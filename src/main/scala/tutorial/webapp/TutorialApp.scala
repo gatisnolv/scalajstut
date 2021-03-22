@@ -36,22 +36,23 @@ object TutorialApp {
   def login(username: String = "user", password: String = "demo"): AsyncCallback[Unit] =
     Ajax.post("http://127.0.0.1:8080/auth")
       .setRequestContentTypeJsonUtf8
+      .and(_.withCredentials = true)
       .send(s"""{ "username": "$username", "password": "$password" }""")
       .validateStatusIsSuccessful(Callback.throwException) // Ensure (status >= 200 && status < 300) || status == 304
       .asAsyncCallback
       .void
 
   val mountNode = dom.document.getElementById("root")
-  document.cookie = "secretValue"
+
 
   val Main = React.Suspense(
     fallback = <.div(^.color := "#33c", ^.fontSize := "150%", "AJAX in progress. Loading..."),
     asyncBody = loadAndRenderOrganisations.handleError(onError))
 
-  def loadOrganisations(sessionCookie: String = "secretValue"): AsyncCallback[List[IndexedOrg]] =
+  def loadOrganisations(): AsyncCallback[List[IndexedOrg]] =
     Ajax.get("http://127.0.0.1:8080/organisation")
       .setRequestContentTypeJsonUtf8
-      .setRequestHeader("session", "secretValue")
+      .and(_.withCredentials = true)
       .send
       .validateStatusIs(200)(Callback.throwException)
       .asAsyncCallback
