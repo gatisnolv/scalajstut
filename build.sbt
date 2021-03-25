@@ -8,6 +8,9 @@ scalaVersion := "2.13.3"
 // This is an application with a main method
 scalaJSUseMainModuleInitializer := true
 
+// useful if a scala-js project has multiple main classes https://www.scala-js.org/doc/project/building.html
+// Compile / mainClass := Some("tutorial.webapp.TutorialApp")
+
 libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "1.1.0"
 
 // Add support for the DOM in `run` and `test`
